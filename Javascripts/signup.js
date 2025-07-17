@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize PouchDB database
     // IMPORTANT: Ensure you add admin credentials if your CouchDB requires authentication.
     // Example with credentials: new PouchDB('http://admin:your_couchdb_password@localhost:5984/users_db');
-    const db = new PouchDB('http://Nirmal:Nirmal@localhost:5984/users_db');
+    const db = new PouchDB('http://@localhost:5984/users_db');
 
     // Function to generate a unique 4-digit number for userId suffix and firstLoginPin
     async function generateUniqueFourDigitSuffix(maxAttempts = 100) {
