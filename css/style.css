@@ -1,0 +1,156 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    background: linear-gradient(to right, #e0f7fa, #bbdefb); /* Soft gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Add some padding for small screens */
+    box-sizing: border-box; /* Ensure padding is included in element's total width/height */
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 35px 30px; /* Increased padding */
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+    width: 100%;
+    max-width: 500px; /* Maximum width for larger screens */
+    box-sizing: border-box;
+    margin: auto; /* Center the container */
+}
+
+h1 {
+    text-align: center;
+    color: #007bff; /* Primary color */
+    margin-bottom: 10px;
+    font-size: 1em; /* Larger title */
+    letter-spacing: 0.5px;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px; /* More space below headings */
+    font-size: 0.8em;
+}
+
+.form-group {
+    margin-bottom: 20px; /* More space between form groups */
+}
+
+label {
+    display: block;
+    margin-bottom: 4px; /* More space below labels */
+    color: #555;
+    font-weight: 600; /* Slightly bolder labels */
+    font-size: 0.8em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+input[type="tel"],
+select {
+    width: 500px; /* Fixed width for larger screens */
+    max-width: calc(100% - 20px); /* Max width for smaller screens, accounting for padding */
+    padding-top: 4px; /* Increased padding inside inputs */
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    margin-top: 5px;
+    border: 1px solid #cceeff; /* Lighter border color */
+    border-radius: 3px; /* Slightly more rounded input corners */
+    box-sizing: border-box;
+    font-size: 10px; /* Standard font size */
+    transition: border-color 0.3s ease-in-out; /* Smooth transition for focus */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+select:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2); /* Soft blue glow on focus */
+}
+
+
+button {
+    width: 100%;
+    padding: 10px; /* Larger button */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px; /* More rounded button */
+    cursor: pointer;
+    font-size: 0.8; /* Larger font on button */
+    font-weight: lighter;
+    margin-top: 15px; /* More space above button */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+p {
+    text-align: center;
+    margin-top: 25px; /* More space above paragraphs */
+    color: #666;
+    font-size: 0.8em;
+}
+
+p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+#forgotPasswordSection, #securityQuestionsSection, #resetPasswordSection {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    .container {
+        margin: 10px; /* Reduce margin on very small screens */
+        padding: 25px 20px; /* Reduce padding */
+    }
+
+    h1 {
+        font-size: 1em;
+    }
+
+    h2, h3 {
+        font-size: 0.8em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="number"],
+    input[type="tel"],
+    select {
+        width: calc(100% - 20px); /* Make inputs full width on small screens */
+    }
+
+    button {
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
