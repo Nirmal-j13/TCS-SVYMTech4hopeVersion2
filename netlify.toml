@@ -1,0 +1,12 @@
+# netlify.toml
+
+[build]
+  # 'publish' should be the directory where your main HTML/CSS/JS files are.
+  # Based on your provided HTML, your index.html is likely in the root, so it's "/".
+  publish = "/"
+
+  # This is the command Netlify will run during deployment.
+  # It uses 'sed' to find 'REPLACE_COUCHDB_URL_WITH_ENV_VAR'
+  # and replace it with the value of the COUCHDB_PROD_URL environment variable.
+  # It targets all .js files inside your 'Javascripts' folder.
+  command = "sed -i 's|REPLACE_COUCHDB_URL_WITH_ENV_VAR|'$COUCHDB_PROD_URL'|g' Javascripts/*.js"
