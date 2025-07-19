@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const COUCHDB_URL='REPLACE_COUCHDB_URL_WITH_ENV_VAR';
 
+const db = new PouchDB(COUCHDB_URL);
+
     let isForgotPasswordFlow = false; // State variable to manage the "Forgot Password" mode
 
     // --- Initial setup: Ensure only 'password' is required by default ---
