@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // And ensure you add admin credentials if your CouchDB requires authentication.
     // Example with credentials: new PouchDB('http://admin:your_couchdb_password@localhost:5984/users_db');
 
-const COUCHDB_URL = process.env.COUCHDB_URL || 'http://Nirmal:Nirmal@localhost:5984/users_db';
-const db = new PouchDB(COUCHDB_URL);
+const COUCHDB_URL = window.GLOBAL_COUCHDB_URL_FOR_LOCAL_DEV || process.env.COUCHDB_URL || 'http://Nirmal:Nirmal@localhost:5984/users_db';
 
 
     let isForgotPasswordFlow = false; // State variable to manage the "Forgot Password" mode
