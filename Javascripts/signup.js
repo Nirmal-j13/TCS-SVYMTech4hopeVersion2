@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const COUCHDB_URL='REPLACE_COUCHDB_URL_WITH_ENV_VAR';
 
+console.log(COUCHDB_URL);
+
 const db = new PouchDB(COUCHDB_URL);
 
     // Function to generate a unique 4-digit number for userId suffix and firstLoginPin
