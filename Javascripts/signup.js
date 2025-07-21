@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // IMPORTANT: Ensure you add admin credentials if your CouchDB requires authentication.
     // Example with credentials: new PouchDB('http://admin:your_couchdb_password@localhost:5984/users_db');
 
-const COUCHDB_URL='REPLACE_COUCHDB_URL_WITH_ENV_VAR';
-
+//const COUCHDB_URL='REPLACE_COUCHDB_URL_WITH_ENV_VAR';
+const LOCAL_URL='http://Nirmal:Nirmal@localhost:5984/users_db'; // Local CouchDB URL for development
+COUCHDB_URL=LOCAL_URL; // Use LOCAL_URL for local development
 console.log(COUCHDB_URL);
 
 const db = new PouchDB(COUCHDB_URL);
