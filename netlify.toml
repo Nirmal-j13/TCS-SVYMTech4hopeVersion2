@@ -3,7 +3,7 @@
 [build]
   publish = "svymfrontend/"
   functions = "svymbackend/functions/"
-  command = ""
+  command = "cd svymbackend/functions && npm ci && cd ../../"
 
 # --- Add this section ---
 [[redirects]]
