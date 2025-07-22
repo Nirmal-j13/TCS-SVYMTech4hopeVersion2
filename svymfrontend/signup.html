@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVYM Tech4Hope - Sign Up</title>
+    <link rel="stylesheet" href="/css/style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="candidateName">Candidate Name:</label>
+                <input type="text" id="candidateName" name="candidateName" required>
+            </div>
+            <div class="form-group">
+                <label for="fatherHusbandName">Father's / Husband's Name:</label>
+                <input type="text" id="fatherHusbandName" name="fatherHusbandName" required>
+            </div>
+            <div class="form-group">
+                <label for="villageName">Village Name:</label>
+                <input type="text" id="villageName" name="villageName" required>
+            </div>
+            <div class="form-group">
+                <label for="talukName">Taluk Name:</label>
+                <input type="text" id="talukName" name="talukName" required>
+            </div>
+            <div class="form-group">
+                <label for="districtName">District Name:</label>
+                <input type="text" id="districtName" name="districtName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="familyMembers">Number of Family Members:</label>
+                <input type="number" id="familyMembers" name="familyMembers" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="qualification">Qualification:</label>
+                <input type="text" id="qualification" name="qualification" required>
+            </div>
+            <div class="form-group">
+                <label for="caste">Caste:</label>
+                <input type="text" id="caste" name="caste" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tribal">Tribal Status:</label>
+                <select id="tribal" name="tribal" required>
+                    <option value="">Select Option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Person with Disability (PWD):</label>
+                <select id="pwd" name="pwd" required>
+                    <option value="">Select Option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="aadharNumber">Aadhar Number:</label>
+                <input type="text" id="aadharNumber" name="aadharNumber" maxlength="12" pattern="[0-9]{12}" title="Please enter a 12-digit Aadhar Number" required>
+            </div>
+            <div class="form-group">
+                <label for="candidatePhone">Candidate Phone Number:</label>
+                <input type="tel" id="candidatePhone" name="candidatePhone" maxlength="10" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="parentPhone">Parent/Guardian Phone Number:</label>
+                <input type="tel" id="parentPhone" name="parentPhone" maxlength="10" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="mobiliserName">Mobiliser Name:</label>
+                <input type="text" id="mobiliserName" name="mobiliserName" required>
+            </div>
+            <div class="form-group">
+                <label for="supportedProject">Supported Project (if any):</label>
+                <input type="text" id="supportedProject" name="supportedProject">
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <button type="submit">Sign Up</button>
+            <p class="link-text">Already have an account? <a href="login.html">Login here</a></p>
+        </form>
+        <div id="message"></div>
+        <div id="generatedUserId"></div>
+    </div>
+
+    <script src="Javascripts/signup.js"></script>
+</body>
+</html>
