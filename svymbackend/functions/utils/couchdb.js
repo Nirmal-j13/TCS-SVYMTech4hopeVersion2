@@ -2,7 +2,7 @@
 const PouchDB = require('pouchdb-node')
 
 // Get CouchDB URL from Netlify environment variables
-const COUCHDB_URL = process.env.COUCHDB_PROD_URL;//"http://Nirmal:Nirmal@localhost:5984/users_db"; 
+const COUCHDB_URL = process.env.COUCHDB_URL;//"http://Nirmal:Nirmal@localhost:5984/users_db"; 
 //process.env.COUCHDB_PROD_URL;
 if (!COUCHDB_URL) {
     console.error("ERROR: COUCHDB_PROD_URL environment variable is not set!");
