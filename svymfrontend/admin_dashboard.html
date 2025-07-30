@@ -4,33 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SVYM Tech4Hope - Admin Dashboard</title>
-   
+
     <link rel="stylesheet" href="css/admin_dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>Admin Dashboard</h1>
-        <nav>
-            <button id="adminLogoutBtn">Logout</button>
-        </nav>
+    <header class="admin-header">
+        <div class="header-content">
+            <button class="hamburger-menu" id="hamburgerMenu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>Admin Dashboard</h1>
+            <nav class="header-nav">
+                <button id="adminLogoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </div>
     </header>
 
-    <div class="dashboard-wrapper"> <nav class="sidebar">
-            <ul>
-                <li><a href="#studentRequests" class="sidebar-link active">Students</a></li>
-                <li><a href="#trainerDetails" class="sidebar-link">Trainers</a></li>
-                <li><a href="#mobilizerDetails" class="sidebar-link">Field Mobilizers</a></li>
-                <li><a href="#feeReports" class="sidebar-link">Fee Reports</a></li>
-            </ul>
-        </nav>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="adminSidebar">
+            <nav>
+                <ul>
+                    <li><a href="#studentRequests" class="sidebar-link active"><i class="fas fa-user-graduate"></i> Students</a></li>
+                    <li><a href="#trainerDetails" class="sidebar-link"><i class="fas fa-chalkboard-teacher"></i> Trainers</a></li>
+                    <li><a href="#mobilizerDetails" class="sidebar-link"><i class="fas fa-people-arrows"></i> Field Mobilizers</a></li>
+                    <li><a href="#feeReports" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> Fee Reports</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <main class="main-content"> <div id="mainMessage" class="message" style="display: none;"></div>
+        <main class="main-content">
+            <div id="mainMessage" class="message" style="display: none;"></div>
 
-            <section id="studentRequests">
-                <h3>Student Requests (Pending Approval)</h3>
-                <div>
-                    <button id="addStudentBtn" class="add-new-btn">Add New Student</button>
-
+            <section id="studentRequests" class="dashboard-section">
+                <div class="section-header">
+                    <h3>Student Requests</h3>
+                    <button id="addStudentBtn" class="add-new-btn"><i class="fas fa-plus"></i> Add New Student</button>
+                </div>
+                <div class="table-responsive">
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -46,13 +57,16 @@
                             <tr><td colspan="6">Loading student data...</td></tr>
                         </tbody>
                     </table>
+                </div>
+                <div id="studentModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3 id="modalTitle">Add New Student</h3>
+                        <form id="studentForm" class="data-form">
+                            <input type="hidden" id="studentFormUserId">
 
-                    <div id="studentModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-button">×</span>
-                            <h3 id="modalTitle">Add New Student</h3>
-                            <form id="studentForm">
-                                <input type="hidden" id="studentFormUserId"> <div class="input-group">
+                            <div class="form-grid">
+                                <div class="input-group">
                                     <label for="formCandidateName">Candidate Name:</label>
                                     <input type="text" id="formCandidateName" required>
                                 </div>
@@ -149,7 +163,6 @@
                                         <option value="Inactive">Inactive</option>
                                     </select>
                                 </div>
-
                                 <div class="input-group">
                                     <label for="formSecurityQuestion">Security Question:</label>
                                     <input type="text" id="formSecurityQuestion" required>
@@ -166,20 +179,23 @@
                                     <label for="formConfirmPin">Confirm PIN:</label>
                                     <input type="text" id="formConfirmPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
                                 </div>
-
-                                <button type="submit" class="save-button">Save Student</button>
-                                <button type="button" class="cancel-button">Cancel</button>
-                            </form>
-                            <div id="formMessage" class="message" style="display: none;"></div>
-                        </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="save-button"><i class="fas fa-save"></i> Save Student</button>
+                                <button type="button" class="cancel-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                            </div>
+                        </form>
+                        <div id="formMessage" class="message" style="display: none;"></div>
                     </div>
                 </div>
             </section>
 
-            <section id="trainerDetails">
-                <h3>Trainer Details</h3>
-                <div>
-                    <button id="addTrainerBtn" class="add-new-btn">Add New Trainer</button>
+            <section id="trainerDetails" class="dashboard-section">
+                <div class="section-header">
+                    <h3>Trainer Details</h3>
+                    <button id="addTrainerBtn" class="add-new-btn"><i class="fas fa-user-plus"></i> Add New Trainer</button>
+                </div>
+                <div class="table-responsive">
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -194,13 +210,17 @@
                             <tr><td colspan="5">Loading trainer data...</td></tr>
                         </tbody>
                     </table>
+                </div>
 
-                    <div id="trainerModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-button">×</span>
-                            <h3 id="trainerModalTitle">Add New Trainer</h3>
-                            <form id="trainerForm">
-                                <input type="hidden" id="formTrainerId"> <div class="input-group">
+                <div id="trainerModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3 id="trainerModalTitle">Add New Trainer</h3>
+                        <form id="trainerForm" class="data-form">
+                            <input type="hidden" id="formTrainerId">
+
+                            <div class="form-grid">
+                                <div class="input-group">
                                     <label for="formTrainerName">Trainer Name:</label>
                                     <input type="text" id="formTrainerName" required>
                                 </div>
@@ -228,20 +248,23 @@
                                     <label for="formTrainerConfirmPin">Confirm PIN:</label>
                                     <input type="text" id="formTrainerConfirmPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
                                 </div>
-
-                                <button type="submit" class="save-button">Save Trainer</button>
-                                <button type="button" class="cancel-button">Cancel</button>
-                            </form>
-                            <div id="trainerFormMessage" class="message" style="display: none;"></div>
-                        </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="save-button"><i class="fas fa-save"></i> Save Trainer</button>
+                                <button type="button" class="cancel-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                            </div>
+                        </form>
+                        <div id="trainerFormMessage" class="message" style="display: none;"></div>
                     </div>
                 </div>
             </section>
 
-            <section id="mobilizerDetails">
-                <h3>Mobilizer Details</h3>
-                <div>
-                    <button id="addMobilizerBtn" class="add-new-btn">Add New Mobilizer</button>
+            <section id="mobilizerDetails" class="dashboard-section">
+                <div class="section-header">
+                    <h3>Field Mobilizer Details</h3>
+                    <button id="addMobilizerBtn" class="add-new-btn"><i class="fas fa-plus-square"></i> Add New Mobilizer</button>
+                </div>
+                <div class="table-responsive">
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -256,13 +279,17 @@
                             <tr><td colspan="5">Loading mobilizer data...</td></tr>
                         </tbody>
                     </table>
+                </div>
 
-                    <div id="mobilizerModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-button">×</span>
-                            <h3 id="mobilizerModalTitle">Add New Mobilizer</h3>
-                            <form id="mobilizerForm">
-                                <input type="hidden" id="formMobilizerId"> <div class="input-group">
+                <div id="mobilizerModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3 id="mobilizerModalTitle">Add New Mobilizer</h3>
+                        <form id="mobilizerForm" class="data-form">
+                            <input type="hidden" id="formMobilizerId">
+
+                            <div class="form-grid">
+                                <div class="input-group">
                                     <label for="formMobilizerName">Mobilizer Name:</label>
                                     <input type="text" id="formMobilizerName" required>
                                 </div>
@@ -294,20 +321,46 @@
                                     <label for="formMobilizerConfirmPin">Confirm PIN:</label>
                                     <input type="text" id="formMobilizerConfirmPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
                                 </div>
-
-                                <button type="submit" class="save-button">Save Mobilizer</button>
-                                <button type="button" class="cancel-button">Cancel</button>
-                            </form>
-                            <div id="mobilizerFormMessage" class="message" style="display: none;"></div>
-                        </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="save-button"><i class="fas fa-save"></i> Save Mobilizer</button>
+                                <button type="button" class="cancel-button"><i class="fas fa-times-circle"></i> Cancel</button>
+                            </div>
+                        </form>
+                        <div id="mobilizerFormMessage" class="message" style="display: none;"></div>
                     </div>
                 </div>
             </section>
 
-            <section id="feeReports">
-                <h3>Fee Reports</h3>
-                <div>
-                    <p>This section will display financial and fee-related reports. (Static content for now)</p>
+            <section id="feeReports" class="dashboard-section">
+                <div class="section-header">
+                    <h3>Fee Reports</h3>
+                    <button class="add-new-btn"><i class="fas fa-file-export"></i> Generate New Report</button>
+                </div>
+                <div class="report-overview">
+                    <p>This section provides an overview of financial and fee-related reports. You can generate various types of reports here.</p>
+                    <div class="report-cards">
+                        <div class="report-card">
+                            <h4>Monthly Collections</h4>
+                            <p>Total collected this month: <strong>₹ 15,000</strong></p>
+                            <p>Expected: ₹ 18,000</p>
+                            <a href="#" class="view-report-link">View Details <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                        <div class="report-card">
+                            <h4>Pending Dues</h4>
+                            <p>Total outstanding: <strong>₹ 3,500</strong></p>
+                            <p>Students with dues: 5</p>
+                            <a href="#" class="view-report-link">View Details <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                        <div class="report-card">
+                            <h4>Annual Summary</h4>
+                            <p>Total collected this year: <strong>₹ 1,20,000</strong></p>
+                            <p>Expenses: ₹ 80,000</p>
+                            <a href="#" class="view-report-link">View Details <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
                     <table class="data-table">
                         <thead>
                             <tr>
@@ -315,6 +368,7 @@
                                 <th>Type</th>
                                 <th>Date Generated</th>
                                 <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -323,22 +377,30 @@
                                 <td>Monthly Collection</td>
                                 <td>2024-07-25</td>
                                 <td>Completed</td>
+                                <td><button class="action-btn-primary"><i class="fas fa-download"></i> Download</button></td>
                             </tr>
                             <tr>
                                 <td>FEE002</td>
                                 <td>Pending Dues</td>
                                 <td>2024-07-20</td>
                                 <td>Generated</td>
+                                <td><button class="action-btn-primary"><i class="fas fa-download"></i> Download</button></td>
+                            </tr>
+                            <tr>
+                                <td>FEE003</td>
+                                <td>Trainer Payments</td>
+                                <td>2024-07-15</td>
+                                <td>Completed</td>
+                                <td><button class="action-btn-primary"><i class="fas fa-download"></i> Download</button></td>
                             </tr>
                         </tbody>
                     </table>
-                    <button class="add-new-btn">Generate New Report</button>
                 </div>
             </section>
         </main>
     </div>
 
-    <footer>
+    <footer class="admin-footer">
         &copy; 2024 SVYM Tech4Hope
     </footer>
     <script src="Javascripts/admin_dashboard.js"></script>

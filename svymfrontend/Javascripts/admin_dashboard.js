@@ -892,3 +892,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Initial admin user added to sessionStorage:', adminUser); // DEBUG: Added log
     }
 });
+const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const adminSidebar = document.getElementById('adminSidebar');
+
+    if (hamburgerMenu && adminSidebar) {
+        hamburgerMenu.addEventListener('click', function() {
+            adminSidebar.classList.toggle('active');
+            // This also helps shift main content if you decide to have it shift
+            document.querySelector('.main-content').classList.toggle('sidebar-active');
+        });
+    }

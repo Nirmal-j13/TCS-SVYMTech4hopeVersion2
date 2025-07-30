@@ -1,59 +1,99 @@
-/* Admin Dashboard Specific Styles */
+/* svymfrontend/css/admin_dashboard.css */
 
-/* Header Styles */
-header {
-    background-color: #007bff; /* Blue header */
+/* Basic Reset & Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Light background */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.admin-header {
+    background-color: #007bff; /* Primary blue */
     color: white;
     padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-header .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex-shrink: 0; /* Prevent header from shrinking */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-header h1 {
+.admin-header h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 1.8em;
+    flex-grow: 1; /* Allows h1 to take available space */
 }
 
-header nav button { /* Style for adminLogoutBtn */
-    background-color: #dc3545; /* Red logout button */
+.admin-header .header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.logout-btn {
+    background-color: #dc3545; /* Red for danger/logout */
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
 }
 
-header nav button:hover {
+.logout-btn:hover {
     background-color: #c82333;
 }
 
-/* Main Content Wrapper for Sidebar and Content Area */
-.dashboard-wrapper {
-    display: flex; /* Use flexbox for sidebar + main content layout */
-    flex: 1; /* Allow this wrapper to grow and take available space */
-    width: 100%;
-    max-width: 1200px; /* Max width for the entire dashboard area */
-    margin: 20px auto; /* Center the dashboard wrapper */
-    background-color: #f4f4f4; /* Match body background */
-    border-radius: 8px; /* Apply border radius to wrapper */
-    overflow: hidden; /* Important for containing floated/flex items */
+/* Hamburger Menu for Mobile */
+.hamburger-menu {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: block; /* Show on mobile */
+    margin-right: 15px;
 }
 
-/* Side Navigation Bar Styles */
+/* Dashboard Container (Sidebar + Main Content) */
+.dashboard-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden; /* Prevent content from spilling */
+}
+
+/* Sidebar */
 .sidebar {
-    width: 200px; /* Fixed width for the sidebar */
-    background-color: #343a40; /* Dark background for sidebar */
+    width: 250px;
+    background-color: #343a40; /* Darker sidebar */
     color: white;
     padding-top: 20px;
-    flex-shrink: 0; /* Prevent sidebar from shrinking */
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Shadow for separation */
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent shrinking */
+    transition: transform 0.3s ease-in-out;
+    position: fixed; /* Make it fixed for mobile overlay */
+    height: calc(100vh - 70px); /* Adjust based on header height */
+    top: 70px; /* Position below header */
+    left: 0;
+    z-index: 999;
+    transform: translateX(-250px); /* Hide by default on mobile */
+}
+
+.sidebar.active {
+    transform: translateX(0); /* Show sidebar on mobile */
 }
 
 .sidebar ul {
@@ -62,206 +102,479 @@ header nav button:hover {
     margin: 0;
 }
 
-.sidebar ul li a {
-    display: block;
+.sidebar li {
+    margin-bottom: 5px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
     color: white;
     text-decoration: none;
-    padding: 15px 20px;
-    transition: background-color 0.3s ease;
-    border-bottom: 1px solid #495057; /* Separator for links */
+    font-size: 1.05em;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.sidebar ul li:last-child a {
-    border-bottom: none; /* No border for the last item */
+.sidebar-link i {
+    margin-right: 10px;
+    font-size: 1.2em;
 }
 
-.sidebar ul li a:hover,
-.sidebar ul li a.active { /* 'active' class for the currently selected link */
-    background-color: #007bff; /* Highlight color */
+.sidebar-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    color: white;
 }
 
-/* Main Content Area beside Sidebar */
-.main-content { /* This now holds the actual dashboard sections */
-    flex-grow: 1; /* Allow main content to take remaining space */
-    background-color: #ffffff;
-    border-radius: 8px; /* Apply border radius to main content area */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px 30px; /* Padding for the content inside */
-    margin-left: 20px; /* Space between sidebar and main content */
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-
-/* Section Styles (cards within main content of dashboards) */
-main section { /* Note: This now applies to sections *inside* .main-content */
-    padding: 0; /* Remove padding from section itself, moved to inner div for content */
-    margin-bottom: 20px; /* Space between sections */
-    border: 1px solid #eee; /* Light border around each section card */
-    border-radius: 8px;
-    background-color: #fdfdfd; /* Slightly off-white background for the cards */
-    box-shadow: 0 1px 5px rgba(0,0,0,0.05); /* Subtle shadow for card effect */
-}
-
-main section h3 { /* Style for h3 inside the sections (heading area of the card) */
-    color: #007bff; /* Blue heading text */
-    margin-top: 0;
-    margin-bottom: 0; /* No bottom margin to align with border */
-    padding: 15px 20px; /* Padding inside the heading area */
-    border-bottom: 1px solid #eee; /* Thin light border below heading */
-    background-color: #f8f8f8; /* Slightly different background for heading bar */
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-main section > div { /* Padding for the content area within each section card */
-    padding: 20px; /* Generous padding for content below the heading */
-}
-
-
-/* General Table Styles */
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.data-table th, .data-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-.data-table th {
-    background-color: #f2f2f2;
+.sidebar-link.active {
+    background-color: #007bff; /* Highlight active link */
     font-weight: bold;
+    border-left: 5px solid #28a745; /* Green accent */
+    padding-left: 15px; /* Adjust padding due to border */
 }
 
-/* Styles for action buttons within tables (Edit, Delete, Assign, View Reports) */
-.data-table button {
-    padding: 6px 10px; /* Smaller padding for in-table buttons as in screenshot */
-    border: none;
-    border-radius: 4px; /* Slightly rounded corners */
-    cursor: pointer;
-    font-size: 0.85em; /* Smaller font size */
-    margin-right: 5px; /* Space between buttons */
-    transition: background-color 0.2s ease;
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f4f7f6;
+    margin-left: 0; /* No margin by default (mobile-first) */
+    transition: margin-left 0.3s ease-in-out;
+    width: 100%; /* Occupy full width on mobile */
+    box-sizing: border-box; /* Include padding in width */
 }
 
-.data-table button:last-child {
-    margin-right: 0;
-}
-
-/* Specific colors for action buttons */
-.data-table .action-btn-primary { /* For Edit, Assign, View Reports (blue) */
-    background-color: #007bff;
-    color: white;
-}
-
-.data-table .action-btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.data-table .action-btn-danger { /* For Delete (red) */
-    background-color: #dc3545;
-    color: white;
-}
-
-.data-table .action-btn-danger:hover {
-    background-color: #c82333;
-}
-
-
-/* Styles for general "Add New..." buttons (green, outside tables) */
-.add-new-btn {
-    margin-top: 10px;
+/* Messages (e.g., success, error) */
+.message {
+    padding: 10px 15px;
     margin-bottom: 20px;
-    padding: 10px 15px; /* Larger padding for these buttons */
-    background-color: #28a745; /* Green */
-    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    display: none; /* Hidden by default, shown by JS */
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.section-header h3 {
+    margin: 0;
+    color: #007bff;
+    font-size: 1.5em;
+}
+
+/* Action Buttons */
+.add-new-btn,
+.action-btn-primary,
+.action-btn-danger,
+.save-button,
+.cancel-button {
+    padding: 10px 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em; /* Standard font size */
-    transition: background-color 0.2s ease;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+}
+
+.add-new-btn i,
+.action-btn-primary i,
+.action-btn-danger i,
+.save-button i,
+.cancel-button i {
+    margin-right: 8px;
+}
+
+.add-new-btn {
+    background-color: #28a745; /* Green for add */
+    color: white;
 }
 
 .add-new-btn:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
+    transform: translateY(-1px);
 }
 
-/* Modal specific styles for forms in sections */
+.action-btn-primary {
+    background-color: #007bff; /* Blue for primary actions */
+    color: white;
+    margin-right: 5px;
+}
+
+.action-btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.action-btn-danger {
+    background-color: #dc3545; /* Red for danger actions */
+    color: white;
+}
+
+.action-btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.save-button {
+    background-color: #007bff;
+    color: white;
+    margin-right: 10px;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}
+
+.cancel-button {
+    background-color: #6c757d; /* Grey for cancel */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #5a6268;
+}
+
+
+/* Table Styles */
+.table-responsive {
+    overflow-x: auto; /* Makes tables scrollable on small screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Prevent text wrapping in table cells */
+}
+
+.data-table th {
+    background-color: #e9ecef; /* Light grey header */
+    color: #495057;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Modal Styles */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    z-index: 1001; /* Sit on top of everything */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    justify-content: center;
-    align-items: center; /* Center vertically and horizontally */
-}
-.modal-content {
-    background-color: #fefefe;
-    margin: auto; /* Center in case of overflow */
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 8px;
-    width: 90%; /* Responsive width */
-    max-width: 550px; /* Max width for consistency */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    position: relative;
-    box-sizing: border-box; /* Ensure padding/border are included in width */
-}
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-.modal-content .input-group {
-    margin-bottom: 15px;
-}
-.modal-content label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-.modal-content input[type="text"],
-.modal-content input[type="email"],
-.modal-content input[type="password"],
-.modal-content select {
-    width: calc(100% - 22px); /* Account for padding and border */
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 20px; /* Add some padding around the modal */
     box-sizing: border-box;
 }
-.modal-content button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Center modal */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%; /* Default width for mobile */
+    max-width: 800px; /* Max width for larger screens */
+    position: relative;
+    animation: fadeInScale 0.3s ease-out;
+    box-sizing: border-box;
+    max-height: 95vh; /* Limit height to allow scrolling if content is long */
+    overflow-y: auto; /* Enable scrolling within modal content */
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content h3 {
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.modal-content .close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 16px;
-    margin-right: 10px;
+    transition: color 0.2s ease;
 }
-.modal-content .save-button {
-    background-color: #007bff;
-    color: white;
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+    color: #333;
+    text-decoration: none;
 }
-.modal-content .cancel-button {
-    background-color: #6c757d;
+
+/* Form Styles */
+.data-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grid {
+    display: grid;
+    gap: 15px; /* Spacing between grid items */
+    grid-template-columns: 1fr; /* Single column on mobile */
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.input-group input[type="text"],
+.input-group input[type="number"],
+.input-group input[type="email"],
+.input-group input[type="tel"],
+.input-group input[type="date"],
+.input-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px; /* Space between buttons */
+}
+
+/* Fee Reports Section Specific */
+.report-overview {
+    background-color: #e9f5ff;
+    border: 1px solid #cce5ff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    color: #004085;
+}
+
+.report-overview p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.report-cards {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.report-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.report-card:hover {
+    transform: translateY(-3px);
+}
+
+.report-card h4 {
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.report-card p {
+    font-size: 0.95em;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.view-report-link {
+    display: inline-flex;
+    align-items: center;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.view-report-link i {
+    margin-left: 5px;
+    transition: margin-left 0.2s ease;
+}
+
+.view-report-link:hover i {
+    margin-left: 10px;
+}
+
+
+/* Footer */
+.admin-footer {
+    background-color: #343a40;
     color: white;
+    text-align: center;
+    padding: 15px 20px;
+    margin-top: auto; /* Pushes footer to the bottom */
+    font-size: 0.9em;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* =========================================================
+   Responsive Design - Media Queries
+   ========================================================= */
+
+/* Tablets (>= 768px) */
+@media (min-width: 768px) {
+    .hamburger-menu {
+        display: none; /* Hide hamburger on larger screens */
+    }
+
+    .sidebar {
+        position: sticky; /* Sidebar is fixed in desktop layout */
+        height: 100vh;
+        top: 0;
+        transform: translateX(0); /* Always show sidebar on desktop */
+        padding-top: 80px; /* Adjust for header height */
+    }
+
+    .main-content {
+        margin-left: 250px; /* Make space for the sidebar */
+        padding: 30px;
+    }
+
+    .admin-header h1 {
+        font-size: 2em;
+        text-align: center; /* Center header title on wider screens */
+        flex-grow: 0;
+    }
+    .admin-header .header-content {
+        justify-content: flex-end; /* Push logout button to right */
+        gap: 20px;
+    }
+    .admin-header .header-nav {
+        order: 2; /* Ensure logout button is on the right */
+    }
+    .admin-header h1 {
+        order: 1; /* Ensure title is on the left */
+        margin-right: auto; /* Push title to the left */
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr 1fr; /* Two columns for forms */
+    }
+
+    /* Adjust specific forms that might need more columns, e.g., student form */
+    #studentForm .form-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible columns for student form */
+    }
+
+    .report-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Two or more columns for report cards */
+    }
+}
+
+/* Desktops (>= 1024px) */
+@media (min-width: 1024px) {
+    .main-content {
+        padding: 40px;
+    }
+
+    .admin-header .header-content {
+        max-width: 1400px; /* Slightly wider header content */
+    }
+
+    /* Adjust for even wider forms if needed */
+    #studentForm .form-grid {
+        grid-template-columns: repeat(3, 1fr); /* Three columns for student form on larger screens */
+    }
+
+    .report-cards {
+        grid-template-columns: repeat(3, 1fr); /* Three columns for report cards */
+    }
 }
