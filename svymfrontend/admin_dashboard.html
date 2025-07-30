@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVYM Tech4Hope - Admin Dashboard</title>
+   
+    <link rel="stylesheet" href="css/admin_dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <button id="adminLogoutBtn">Logout</button>
+        </nav>
+    </header>
+
+    <div class="dashboard-wrapper"> <nav class="sidebar">
+            <ul>
+                <li><a href="#studentRequests" class="sidebar-link active">Students</a></li>
+                <li><a href="#trainerDetails" class="sidebar-link">Trainers</a></li>
+                <li><a href="#mobilizerDetails" class="sidebar-link">Field Mobilizers</a></li>
+                <li><a href="#feeReports" class="sidebar-link">Fee Reports</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content"> <div id="mainMessage" class="message" style="display: none;"></div>
+
+            <section id="studentRequests">
+                <h3>Student Requests (Pending Approval)</h3>
+                <div>
+                    <button id="addStudentBtn" class="add-new-btn">Add New Student</button>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <tr><td colspan="6">Loading student data...</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div id="studentModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button">×</span>
+                            <h3 id="modalTitle">Add New Student</h3>
+                            <form id="studentForm">
+                                <input type="hidden" id="studentFormUserId"> <div class="input-group">
+                                    <label for="formCandidateName">Candidate Name:</label>
+                                    <input type="text" id="formCandidateName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formFatherHusbandName">Father's / Husband's Name:</label>
+                                    <input type="text" id="formFatherHusbandName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formDistrictName">District Name:</label>
+                                    <input type="text" id="formDistrictName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formTalukName">Taluk Name:</label>
+                                    <input type="text" id="formTalukName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formVillageName">Village Name:</label>
+                                    <input type="text" id="formVillageName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formDob">Date of Birth:</label>
+                                    <input type="date" id="formDob" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formAge">Age:</label>
+                                    <input type="number" id="formAge" readonly required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formFamilyMembers">Number of Family Members:</label>
+                                    <input type="number" id="formFamilyMembers" min="1" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formQualification">Qualification:</label>
+                                    <input type="text" id="formQualification" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formCaste">Caste:</label>
+                                    <input type="text" id="formCaste" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formGender">Gender:</label>
+                                    <select id="formGender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formTribal">Tribal Status:</label>
+                                    <select id="formTribal" required>
+                                        <option value="">Select Option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formPwd">Person with Disability (PWD):</label>
+                                    <select id="formPwd" required>
+                                        <option value="">Select Option</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formAadharNumber">Aadhar Number:</label>
+                                    <input type="text" id="formAadharNumber" required pattern="\d{12}" title="Aadhar number must be 12 digits">
+                                </div>
+                                <div class="input-group">
+                                    <label for="formCandidatePhone">Candidate Phone Number:</label>
+                                    <input type="tel" id="formCandidatePhone" required pattern="\d{10}" title="Phone number must be 10 digits">
+                                </div>
+                                <div class="input-group">
+                                    <label for="formParentPhone">Parent/Guardian Phone Number:</label>
+                                    <input type="tel" id="formParentPhone" required pattern="\d{10}" title="Phone number must be 10 digits">
+                                </div>
+                                <div class="input-group">
+                                    <label for="formMobiliserName">Mobiliser Name:</label>
+                                    <input type="text" id="formMobiliserName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formSupportedProject">Supported Project (Optional):</label>
+                                    <input type="text" id="formSupportedProject">
+                                </div>
+                                <div class="input-group">
+                                    <label for="formEmail">Email ID:</label>
+                                    <input type="email" id="formEmail" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formStatus">Status:</label>
+                                    <select id="formStatus" required>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="formSecurityQuestion">Security Question:</label>
+                                    <input type="text" id="formSecurityQuestion" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formSecurityAnswer">Security Answer:</label>
+                                    <input type="text" id="formSecurityAnswer" required>
+                                </div>
+                                <div class="input-group" id="formPinGroup">
+                                    <label for="formPin">PIN (4-digit):</label>
+                                    <input type="text" id="formPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
+                                </div>
+                                <div class="input-group" id="formConfirmPinGroup">
+                                    <label for="formConfirmPin">Confirm PIN:</label>
+                                    <input type="text" id="formConfirmPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
+                                </div>
+
+                                <button type="submit" class="save-button">Save Student</button>
+                                <button type="button" class="cancel-button">Cancel</button>
+                            </form>
+                            <div id="formMessage" class="message" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trainerDetails">
+                <h3>Trainer Details</h3>
+                <div>
+                    <button id="addTrainerBtn" class="add-new-btn">Add New Trainer</button>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Trainer ID</th>
+                                <th>Name</th>
+                                <th>Expertise</th>
+                                <th>Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trainersTableBody">
+                            <tr><td colspan="5">Loading trainer data...</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div id="trainerModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button">×</span>
+                            <h3 id="trainerModalTitle">Add New Trainer</h3>
+                            <form id="trainerForm">
+                                <input type="hidden" id="formTrainerId"> <div class="input-group">
+                                    <label for="formTrainerName">Trainer Name:</label>
+                                    <input type="text" id="formTrainerName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formTrainerExpertise">Expertise:</label>
+                                    <input type="text" id="formTrainerExpertise" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formTrainerContact">Contact (Email/Phone):</label>
+                                    <input type="text" id="formTrainerContact" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formTrainerSecurityQuestion">Security Question:</label>
+                                    <input type="text" id="formTrainerSecurityQuestion" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formTrainerSecurityAnswer">Security Answer:</label>
+                                    <input type="text" id="formTrainerSecurityAnswer" required>
+                                </div>
+                                <div class="input-group" id="formTrainerPinGroup">
+                                    <label for="formTrainerPin">PIN (4-digit):</label>
+                                    <input type="text" id="formTrainerPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
+                                </div>
+                                <div class="input-group" id="formTrainerConfirmPinGroup">
+                                    <label for="formTrainerConfirmPin">Confirm PIN:</label>
+                                    <input type="text" id="formTrainerConfirmPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
+                                </div>
+
+                                <button type="submit" class="save-button">Save Trainer</button>
+                                <button type="button" class="cancel-button">Cancel</button>
+                            </form>
+                            <div id="trainerFormMessage" class="message" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mobilizerDetails">
+                <h3>Mobilizer Details</h3>
+                <div>
+                    <button id="addMobilizerBtn" class="add-new-btn">Add New Mobilizer</button>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Mobilizer ID</th>
+                                <th>Name</th>
+                                <th>Area</th>
+                                <th>Total Signups</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mobilizersTableBody">
+                            <tr><td colspan="5">Loading mobilizer data...</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div id="mobilizerModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button">×</span>
+                            <h3 id="mobilizerModalTitle">Add New Mobilizer</h3>
+                            <form id="mobilizerForm">
+                                <input type="hidden" id="formMobilizerId"> <div class="input-group">
+                                    <label for="formMobilizerName">Mobilizer Name:</label>
+                                    <input type="text" id="formMobilizerName" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formMobilizerArea">Area:</label>
+                                    <input type="text" id="formMobilizerArea" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formMobilizerContact">Contact (Email/Phone):</label>
+                                    <input type="text" id="formMobilizerContact" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formMobilizerTotalSignups">Total Signups:</label>
+                                    <input type="number" id="formMobilizerTotalSignups" min="0" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formMobilizerSecurityQuestion">Security Question:</label>
+                                    <input type="text" id="formMobilizerSecurityQuestion" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="formMobilizerSecurityAnswer">Security Answer:</label>
+                                    <input type="text" id="formMobilizerSecurityAnswer" required>
+                                </div>
+                                <div class="input-group" id="formMobilizerPinGroup">
+                                    <label for="formMobilizerPin">PIN (4-digit):</label>
+                                    <input type="text" id="formMobilizerPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
+                                </div>
+                                <div class="input-group" id="formMobilizerConfirmPinGroup">
+                                    <label for="formMobilizerConfirmPin">Confirm PIN:</label>
+                                    <input type="text" id="formMobilizerConfirmPin" pattern="^\d{4}$" maxlength="4" title="Must be a 4-digit number" required>
+                                </div>
+
+                                <button type="submit" class="save-button">Save Mobilizer</button>
+                                <button type="button" class="cancel-button">Cancel</button>
+                            </form>
+                            <div id="mobilizerFormMessage" class="message" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="feeReports">
+                <h3>Fee Reports</h3>
+                <div>
+                    <p>This section will display financial and fee-related reports. (Static content for now)</p>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Report ID</th>
+                                <th>Type</th>
+                                <th>Date Generated</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>FEE001</td>
+                                <td>Monthly Collection</td>
+                                <td>2024-07-25</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>FEE002</td>
+                                <td>Pending Dues</td>
+                                <td>2024-07-20</td>
+                                <td>Generated</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="add-new-btn">Generate New Report</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2024 SVYM Tech4Hope
+    </footer>
+    <script src="Javascripts/admin_dashboard.js"></script>
+</body>
+</html>

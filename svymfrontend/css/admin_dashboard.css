@@ -1,0 +1,267 @@
+/* Admin Dashboard Specific Styles */
+
+/* Header Styles */
+header {
+    background-color: #007bff; /* Blue header */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header nav button { /* Style for adminLogoutBtn */
+    background-color: #dc3545; /* Red logout button */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+header nav button:hover {
+    background-color: #c82333;
+}
+
+/* Main Content Wrapper for Sidebar and Content Area */
+.dashboard-wrapper {
+    display: flex; /* Use flexbox for sidebar + main content layout */
+    flex: 1; /* Allow this wrapper to grow and take available space */
+    width: 100%;
+    max-width: 1200px; /* Max width for the entire dashboard area */
+    margin: 20px auto; /* Center the dashboard wrapper */
+    background-color: #f4f4f4; /* Match body background */
+    border-radius: 8px; /* Apply border radius to wrapper */
+    overflow: hidden; /* Important for containing floated/flex items */
+}
+
+/* Side Navigation Bar Styles */
+.sidebar {
+    width: 200px; /* Fixed width for the sidebar */
+    background-color: #343a40; /* Dark background for sidebar */
+    color: white;
+    padding-top: 20px;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Shadow for separation */
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #495057; /* Separator for links */
+}
+
+.sidebar ul li:last-child a {
+    border-bottom: none; /* No border for the last item */
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active { /* 'active' class for the currently selected link */
+    background-color: #007bff; /* Highlight color */
+}
+
+/* Main Content Area beside Sidebar */
+.main-content { /* This now holds the actual dashboard sections */
+    flex-grow: 1; /* Allow main content to take remaining space */
+    background-color: #ffffff;
+    border-radius: 8px; /* Apply border radius to main content area */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px; /* Padding for the content inside */
+    margin-left: 20px; /* Space between sidebar and main content */
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+
+/* Section Styles (cards within main content of dashboards) */
+main section { /* Note: This now applies to sections *inside* .main-content */
+    padding: 0; /* Remove padding from section itself, moved to inner div for content */
+    margin-bottom: 20px; /* Space between sections */
+    border: 1px solid #eee; /* Light border around each section card */
+    border-radius: 8px;
+    background-color: #fdfdfd; /* Slightly off-white background for the cards */
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05); /* Subtle shadow for card effect */
+}
+
+main section h3 { /* Style for h3 inside the sections (heading area of the card) */
+    color: #007bff; /* Blue heading text */
+    margin-top: 0;
+    margin-bottom: 0; /* No bottom margin to align with border */
+    padding: 15px 20px; /* Padding inside the heading area */
+    border-bottom: 1px solid #eee; /* Thin light border below heading */
+    background-color: #f8f8f8; /* Slightly different background for heading bar */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+main section > div { /* Padding for the content area within each section card */
+    padding: 20px; /* Generous padding for content below the heading */
+}
+
+
+/* General Table Styles */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Styles for action buttons within tables (Edit, Delete, Assign, View Reports) */
+.data-table button {
+    padding: 6px 10px; /* Smaller padding for in-table buttons as in screenshot */
+    border: none;
+    border-radius: 4px; /* Slightly rounded corners */
+    cursor: pointer;
+    font-size: 0.85em; /* Smaller font size */
+    margin-right: 5px; /* Space between buttons */
+    transition: background-color 0.2s ease;
+}
+
+.data-table button:last-child {
+    margin-right: 0;
+}
+
+/* Specific colors for action buttons */
+.data-table .action-btn-primary { /* For Edit, Assign, View Reports (blue) */
+    background-color: #007bff;
+    color: white;
+}
+
+.data-table .action-btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.data-table .action-btn-danger { /* For Delete (red) */
+    background-color: #dc3545;
+    color: white;
+}
+
+.data-table .action-btn-danger:hover {
+    background-color: #c82333;
+}
+
+
+/* Styles for general "Add New..." buttons (green, outside tables) */
+.add-new-btn {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px 15px; /* Larger padding for these buttons */
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em; /* Standard font size */
+    transition: background-color 0.2s ease;
+}
+
+.add-new-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Modal specific styles for forms in sections */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center; /* Center vertically and horizontally */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Center in case of overflow */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 90%; /* Responsive width */
+    max-width: 550px; /* Max width for consistency */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+    box-sizing: border-box; /* Ensure padding/border are included in width */
+}
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-content .input-group {
+    margin-bottom: 15px;
+}
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="password"],
+.modal-content select {
+    width: calc(100% - 22px); /* Account for padding and border */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.modal-content button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+.modal-content .save-button {
+    background-color: #007bff;
+    color: white;
+}
+.modal-content .cancel-button {
+    background-color: #6c757d;
+    color: white;
+}

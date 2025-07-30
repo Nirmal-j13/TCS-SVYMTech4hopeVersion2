@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
         if (!userId || !password) {
             return { statusCode: 400, body: JSON.stringify({ message: 'User ID and password/PIN are required.' }) };
         }
-
+        
         let userDoc;
         try {
             userDoc = await db.get(userId);
