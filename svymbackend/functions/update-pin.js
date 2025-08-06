@@ -8,14 +8,14 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        const { userId, oldPin, newPin } = JSON.parse(event.body);
+        const { userId,newPin } = JSON.parse(event.body);
 
-        if (!userId || !oldPin || !newPin) {
-            return { statusCode: 400, body: JSON.stringify({ message: 'All fields (User ID, old PIN, new PIN) are required.' }) };
+        if (!userId|| !newPin) {
+            return { statusCode: 400, body: JSON.stringify({ message: 'All fields (User ID, new PIN) are required.' }) };
         }
 
-        if (newPin.length !== 4 || !/^\d{4}$/.test(newPin)) {
-            return { statusCode: 400, body: JSON.stringify({ message: 'New PIN must be a 4-digit number.' }) };
+        if (newPin.length !== 5 || !/^\d{5}$/.test(newPin)) {
+            return { statusCode: 400, body: JSON.stringify({ message: 'New PIN must be a 5-digit number.' }) };
         }
 
         let userDoc;
@@ -30,10 +30,10 @@ exports.handler = async (event, context) => {
 
         // Validate old PIN against stored hashed PIN
         // This is crucial to ensure the user is authorized to change their PIN.
-        const isOldPinMatch = await bcrypt.compare(oldPin, userDoc.password);
+        /*const isOldPinMatch = await bcrypt.compare(oldPin, userDoc.password);
         if (!isOldPinMatch) {
             return { statusCode: 401, body: JSON.stringify({ message: 'Invalid old PIN provided.' }) };
-        }
+        }*/
 
         // Hash the new PIN
         const hashedNewPin = await bcrypt.hash(newPin, 10); // 10 salt rounds

@@ -12,20 +12,20 @@
         <h2>Login to SVYM Tech4Hope</h2>
         <form id="loginForm">
             <div class="form-group">
-                <label for="userId">User ID (SVYMXXXX)</label>
-                <input type="text" id="userId" name="userId" placeholder="e.g., SVYM1234" required pattern="SVYM\d{4}" title="User ID must be SVYM followed by 4 digits">
+                <label for="userId">User ID (SVYMXXXXX)</label>
+                <input type="text" id="userId" name="userId" placeholder="e.g., SVYM12345" required pattern="SVYM\d{5}" title="User ID must be SVYM followed by 5 digits">
             </div>
             <div class="form-group" id="passwordGroup">
                 <label for="password">Password/PIN</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="form-group" id="newPasswordGroup" style="display:none;">
-                <label for="newPassword">New 4-digit PIN</label>
-                <input type="password" id="newPassword" name="newPassword" maxlength="4" pattern="[0-9]{4}" title="Please enter a 4-digit PIN">
+                <label for="newPassword">New 5-digit PIN</label>
+                <input type="password" id="newPassword" name="newPassword" maxlength="5" pattern="[0-9]{5}" title="Please enter a 5-digit PIN">
             </div>
             <div class="form-group" id="confirmNewPasswordGroup" style="display:none;">
-                <label for="confirmNewPassword">Confirm New 4-digit PIN</label>
-                <input type="password" id="confirmNewPassword" name="confirmNewPassword" maxlength="4" pattern="[0-9]{4}" >
+                <label for="confirmNewPassword">Confirm New 5-digit PIN</label>
+                <input type="password" id="confirmNewPassword" name="confirmNewPassword" maxlength="5" pattern="[0-9]{5}" >
             </div>
             <button type="submit">Login</button>
         </form>

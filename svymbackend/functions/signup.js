@@ -1,5 +1,5 @@
 // netlify/functions/signup.js
-const { db, ensureDesignDoc, generateUniqueFourDigitSuffix } = require('./utils/couchdb');
+const { db, ensureDesignDoc, generateUniqueFiveDigitSuffix } = require('./utils/couchdb');
 const bcrypt = require('bcrypt'); // Import bcrypt for secure hashing
 
 // Ensure design doc exists when the function is invoked
@@ -54,10 +54,10 @@ exports.handler = async (event, context) => {
             return { statusCode: 409, body: JSON.stringify({ message: 'A user with this email ID already exists. Please use a different email.' }) };
         }
 
-        // Generate Unique User ID (SVYMXXXX) and First Login PIN
-        const uniqueSuffix = await generateUniqueFourDigitSuffix();
+        // Generate Unique User ID (SVYMXXXXX) and First Login PIN
+        const uniqueSuffix = await generateUniqueFiveDigitSuffix();
         const userId = `SVYM${uniqueSuffix}`;
-        const firstLoginPin = uniqueSuffix; // First-time PIN is the 4-digit suffix
+        const firstLoginPin = uniqueSuffix; // First-time PIN is the 5-digit suffix
 
         // Hash the initial PIN using bcrypt for secure storage
         // bcrypt.hash takes the plain string and a salt round (higher = slower, more secure)
@@ -87,10 +87,12 @@ exports.handler = async (event, context) => {
             password: hashedPassword, // Store the hashed PIN
             isFirstLogin: true, // Flag to indicate first-time login
             loginCount: 0,
+            isAppRejPen: 0,
             createdAt: new Date().toISOString()
         };
 
         const response = await db.put(newUser);
+        
 
         if (response.ok) {
             return {
@@ -101,6 +103,7 @@ exports.handler = async (event, context) => {
                     firstLoginPin: firstLoginPin // Send back the plain PIN for first-time display
                 })
             };
+
         } else {
             return { statusCode: 500, body: JSON.stringify({ message: `Sign up failed: ${response.reason || 'Unknown database error'}` }) };
         }

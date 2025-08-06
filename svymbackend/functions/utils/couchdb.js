@@ -55,13 +55,13 @@ async function ensureDesignDoc() {
 
 // Function to generate a unique 4-digit number for userId suffix and firstLoginPin
 // This is critical for generating unique IDs for new users
-async function generateUniqueFourDigitSuffix(maxAttempts = 100) {
+async function generateUniqueFiveDigitSuffix(maxAttempts = 100) {
     let suffix;
     let isUnique = false;
     let attempts = 0;
 
     while (!isUnique && attempts < maxAttempts) {
-        suffix = Math.floor(1000 + Math.random() * 9000).toString(); // Generate a 4-digit number
+        suffix = Math.floor(10000 + Math.random() * 90000).toString(); // Generate a 5-digit number
         const potentialUserId = `SVYM${suffix}`;
 
         try {
@@ -87,5 +87,5 @@ async function generateUniqueFourDigitSuffix(maxAttempts = 100) {
 module.exports = {
     db,
     ensureDesignDoc,
-    generateUniqueFourDigitSuffix
+    generateUniqueFiveDigitSuffix
 };

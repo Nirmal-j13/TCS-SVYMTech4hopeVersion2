@@ -1,14 +1,15 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     const signupForm = document.getElementById('signupForm');
     const messageDiv = document.getElementById('message');
     const generatedUserIdDiv = document.getElementById('generatedUserId');
-
+      const all_response=await fetch('/.netlify/functions/allstudents');
+        const all_students=await all_response.json();
+        console.log('All students:', all_students);
     // Form fields
     const dobInput = document.getElementById('dob');
     const ageInput = document.getElementById('age');
     const districtSelect = document.getElementById('districtName');
     const talukSelect = document.getElementById('talukName');
-    const caste=document.getElementById('caste');
 
     // Error message spans
     const errorSpans = {
@@ -105,8 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- End Dynamic Taluk Population Logic ---
-
-   caste.addEventListener('change', function() {
+    caste.addEventListener('change', function() {
           console.log('Caste selected:', this.value);
 
           clearError(caste); // Clear error if caste selected
@@ -134,8 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
             clearError(ageInput);
         }
     });
-
-
 
     // Helper to show error messages next to fields
     function showError(inputElement, message) {
@@ -239,11 +237,10 @@ document.addEventListener('DOMContentLoaded', function() {
             showError(talukSelect, 'Please select a taluk.');
             isValid = false;
         }
-        if( caste.value === '') {
+         if( caste.value === '') {
             showError(caste, 'Please select a caste.');
             isValid = false;
         }
-
 
         if (!isValid) {
             showMessage('error', 'Please correct the errors in the form.');
@@ -261,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const result = await response.json();
-            
+
             if (response.ok) {
                 showMessage('success', result.message || 'Sign up successful!');
                 generatedUserIdDiv.innerHTML = `Your User ID: <strong>${result.userId}</strong><br>Please remember this ID for login.`;
@@ -270,10 +267,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 ageInput.value = ''; // Clear age field too
                 talukSelect.innerHTML = '<option value="">Select Taluk</option>'; // Reset taluk options
                 talukSelect.disabled = true; // Disable taluk dropdown
-                 let v=document.getElementById('adminapprovalMessage');
+                let v=document.getElementById('adminapprovalMessage');
                 v.style.display = 'block';
                 v.className = 'message success';
                 v.textContent = 'Your request has been sent for admin approval. You will be notified once approved.'; 
+                
             } else {
                 showMessage('error', result.message || 'Sign up failed. Please try again.');
             }
@@ -281,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error during sign up:', error);
             showMessage('error', 'An unexpected error occurred. Please try again later.');
         }
+      
     });
 
     function showMessage(type, text) {
@@ -289,5 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.classList.add('message', type);
         messageDiv.style.display = 'block';
     }
+         
 });
 
