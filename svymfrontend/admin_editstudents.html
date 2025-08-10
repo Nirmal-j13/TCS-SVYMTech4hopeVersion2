@@ -49,11 +49,24 @@
             box-shadow: var(--box-shadow);
             padding: 30px;
         }
+        .data-list-container h1{
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+         .data-list-container h1 .icon {
+            font-size: 1.5rem;
+        }
 
         /* Header and Search Bar */
         .header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             flex-wrap: wrap;
             margin-bottom: 25px;
@@ -287,6 +300,97 @@
             from { top: -300px; opacity: 0 }
             to { top: 0; opacity: 1 }
         }
+        /* Pagination Controls */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .data-table {
+            min-width: 100%;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-head {
+            background-color: #e5e7eb;
+            color: #4b5563;
+            text-transform: uppercase;
+            font-size: 0.875rem; /* 14px */
+            line-height: 1.25rem;
+        }
+
+        .table-head th {
+            padding: 0.75rem 1.5rem;
+            text-align: left;
+        }
+
+        .table-body tr {
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .table-body tr:hover {
+            background-color: #f3f4f6;
+        }
+
+        .table-body td {
+            padding: 0.75rem 1.5rem;
+            white-space: nowrap;
+        }
+
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+
+        .page-button {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .page-button:hover:not(:disabled) {
+            background-color: rgb(0, 115, 156);
+        }
+
+        .page-button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            color: #374151;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 500;
+        }
+        /*Filter Table */
+        .filter-container
+        {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .custom-select-filter {
+            width: 200px;
+            padding: 0.5rem; /* p-2 */
+            border: 1px solid #d1d5db; /* border border-gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            font-size: 1rem; /* text-base */
+         }
         /* Responsive Design */
         @media (max-width: 768px) {
             .data-list-container {
@@ -305,14 +409,24 @@
 <body>
 
     <div class="data-list-container">
-        <div class="header">
             <h1>
                 SVYM Tech4Hope Students Data <i class="fas fa-file-alt"></i>
             </h1>
+        <div class="header">
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search by Name or Course...">
                 <button id="searchBtn"><i class="fas fa-search"></i></button>
             </div>
+            <div class="filter-container">
+                <label for="statusFilter">Filter by Status:</label>
+           <select id="statusFilter" class="custom-select-filter">
+                    <option value="All">All Status</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Inactive">InActive</option>
+           </select>
+           </div>
         </div>
 
         <div class="table-responsive">
@@ -331,6 +445,15 @@
                     <!-- Dynamic rows will be inserted here by JavaScript -->
                 </tbody>
             </table>
+        </div>
+        <div id="pagination-controls" class="pagination-controls">
+            <button id="prevBtn" class="page-button">
+                Previous
+            </button>
+            <span id="page-info" class="page-info">Page 1 of 1</span>
+            <button id="nextBtn" class="page-button">
+                Next
+            </button>
         </div>
     </div>
      <div id="viewModal" class="modal">
@@ -365,7 +488,10 @@
         
             </div>
         </div>
+        
     </div>
+    
+     
   <script src="/Javascripts/admin_editstudents.js"></script>
 </body>
 </html>

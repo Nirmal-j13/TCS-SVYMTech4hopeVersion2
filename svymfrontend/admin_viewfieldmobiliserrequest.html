@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVYM Tech4Hope - Admin Edit/View Student Data</title>
+    <title>SVYM Tech4Hope - Admin Edit/View FieldMobiliser Data</title>
     <!-- Google Fonts for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -329,10 +329,10 @@
     <div class="data-list-container">
         <div class="header">
             <h1>
-                SVYM Tech4Hope Students Data <i class="fas fa-file-alt"></i>
+                SVYM Tech4Hope FieldMobiliser Data <i class="fas fa-file-alt"></i>
             </h1>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search by Name or Course...">
+                <input type="text" id="searchInput" placeholder="Search by Name...">
                 <button id="searchBtn"><i class="fas fa-search"></i></button>
             </div>
         </div>
@@ -344,12 +344,12 @@
                         <th>UserID</th>
                         <th>Name</th>
                         <th>Email Id</th>
-                        <th>Course</th>
+                        <th>Supported Project</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="studentTableBody">
+                <tbody id="fieldmobiliserTableBody">
                     <!-- Dynamic rows will be inserted here by JavaScript -->
                 </tbody>
             </table>
@@ -364,6 +364,6 @@
             </button>
         </div>
     </div>
-  <script src="/Javascripts/admin_viewstudentrequest.js"></script>
+  <script src="/Javascripts/admin_viewfieldmobiliserrequest.js"></script>
 </body>
 </html>

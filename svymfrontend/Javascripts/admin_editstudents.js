@@ -155,4 +155,100 @@
             
             // Add event listener to the search button
             document.getElementById('searchBtn').addEventListener('click', handleSearch);
+
+
+
+
+
+            const tableBody = document.querySelector('.data-table tbody');
+            const allRows = Array.from(tableBody.querySelectorAll('tr'));
+            
+            // Set the number of rows to display per page
+            const rowsPerPage = 5;
+            let currentPage = 1;
+            let filteredRows = allRows; // Start with all rows
+
+            // Get the pagination, filter, and summary controls
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pageInfo = document.getElementById('page-info');
+            const statusFilter = document.getElementById('statusFilter');
+            const totalEntries = document.getElementById('total-entries');
+
+            /**
+             * Displays a specific page of data in the table.
+             * @param {number} page The page number to display.
+             * @param {Array} data The array of rows to paginate.
+             */
+            function displayPage(page, data) {
+                // Calculate the total number of pages based on the current data
+                const totalPages = Math.ceil(data.length / rowsPerPage);
+
+                // Hide all rows initially
+                allRows.forEach(row => row.style.display = 'none');
+
+                // Calculate the start and end index for the rows on the current page
+                const startIndex = (page - 1) * rowsPerPage;
+                const endIndex = startIndex + rowsPerPage;
+
+                // Loop through the rows for the current page and display them
+                for (let i = startIndex; i < endIndex && i < data.length; i++) {
+                    data[i].style.display = '';
+                }
+
+                // Update the page information text
+                pageInfo.textContent = `Page ${page} of ${totalPages}`;
+
+                // Update the total entries summary
+                totalEntries.textContent = data.length;
+
+                // Disable or enable the navigation buttons based on the current page
+                prevBtn.disabled = page === 1;
+                nextBtn.disabled = page >= totalPages;
+            }
+
+            /**
+             * Filters the table rows based on the selected status.
+             */
+            function filterTable() {
+                const selectedStatus = statusFilter.value;
+                
+                if (selectedStatus === 'All') {
+                    filteredRows = allRows;
+                } 
+                else {
+                    filteredRows = allRows.filter(row => {
+                        // The status is in the last <td> element
+                        const statusCell = row.querySelector('td:nth-child(5) .status');
+                        return statusCell.textContent.trim() === selectedStatus;
+                    });
+                }
+                
+                // Reset to the first page and display the filtered data
+                currentPage = 1;
+                displayPage(currentPage, filteredRows);
+            }
+
+            // Event listener for the "Previous" button
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayPage(currentPage, filteredRows);
+                }
+            });
+
+            // Event listener for the "Next" button
+            nextBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayPage(currentPage, filteredRows);
+                }
+            });
+
+            // Event listener for the filter dropdown
+            statusFilter.addEventListener('change', filterTable);
+
+            // Initial display of the first page with all data
+            displayPage(currentPage, filteredRows);
     });

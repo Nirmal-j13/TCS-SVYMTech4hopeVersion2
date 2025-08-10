@@ -1,98 +1,58 @@
-let mobilizers = [];
-let editingMobilizerIndex = -1;
 
-function saveMobilizer() {
-  const name = document.getElementById("mobilizerName").value.trim();
-  const region = document.getElementById("mobilizerRegion").value.trim();
-  const phone = document.getElementById("mobilizerPhone").value.trim();
-  const email = document.getElementById("mobilizerEmail").value.trim();
 
-  if (!name || !region || !phone || !email) {
-    alert("Please fill out all fields.");
-    return;
-  }
+document.addEventListener('DOMContentLoaded', async function() {
 
-  const mobilizerData = { name, region, phone, email };
-
-  if (editingMobilizerIndex >= 0) {
-    mobilizers[editingMobilizerIndex] = mobilizerData;
-    editingMobilizerIndex = -1;
-    document.getElementById("mobilizerFormTitle").innerText = "Add Field Mobilizer";
-  } else {
-    mobilizers.push(mobilizerData);
-  }
-
-  clearMobilizerForm();
-  renderMobilizerList();
+   try{
+    totalrequests = 0;
+totalapproved = 0;
+totalrejected = 0;
+totalpending = 0;
+   const response = await fetch('/.netlify/functions/fieldmobiliserallrequest');
+   const fieldmobiliserrequest=await response.json()
+   console.log('Fetched fieldmobiliser request data:', fieldmobiliserrequest);
+   console.log(typeof(fieldmobiliserrequest));
+   for(let i=0;i<fieldmobiliserrequest.fieldmobilisers.length;i++){
+       if(fieldmobiliserrequest.fieldmobilisers[i].isAppRejPen === 0) {
+           totalpending++;
+       }
+       else if(fieldmobiliserrequest.fieldmobilisers[i].isAppRejPen === 1) {
+           totalapproved++;
+       }
+       else if(fieldmobiliserrequest.fieldmobilisers[i].isAppRejPen === 2) {
+              totalrejected++;
+         }
+      console.log(`Field Mobiliser ID: ${fieldmobiliserrequest.fieldmobilisers[i]._id}, Name: ${fieldmobiliserrequest.fieldmobilisers[i].FieldMobiliserName}, Email: ${fieldmobiliserrequest.fieldmobilisers[i].FieldMobiliserEmailID}, Region: ${fieldmobiliserrequest.fieldmobilisers[i].FieldMobiliserRegion}, Supported Project: ${fieldmobiliserrequest.fieldmobilisers[i].FieldMobiliserSupportedProject}, Status: ${fieldmobiliserrequest.fieldmobilisers[i].isAppRejPen}`);
+   }
+   totalrequests = totalapproved + totalrejected + totalpending;
+   document.getElementById('totalRequests').textContent = totalrequests.toString();
+   document.getElementById('approvedRequests').textContent = totalapproved.toString();
+   document.getElementById('rejectedRequests').textContent= totalrejected.toString();
+   document.getElementById('pendingRequests').textContent = totalpending.toString();
+   console.log('Total Requests:', totalrequests);
+   console.log('Total Approved:', totalapproved);
+   console.log('Total Rejected:', totalrejected);
+   console.log('Total Pending:', totalpending);
+   }
+catch(error) {
+    console.error('Error fetching student data:', error);
 }
+});
 
-function renderMobilizerList() {
-  const mobilizerBody = document.getElementById("mobilizerBody");
-  mobilizerBody.innerHTML = "";
+let addfieldmobiliser=document.getElementById('addfieldmobiliser');
+addfieldmobiliser.addEventListener('click', function() {
+    // Redirect to the add students page
+    window.location.href = 'admin_addfieldmobiliser.html';
+});
 
-  mobilizers.forEach((mobilizer, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${mobilizer.name}</td>
-      <td>${mobilizer.region}</td>
-      <td>${mobilizer.phone}</td>
-      <td>${mobilizer.email}</td>
-      <td>
-        <button class="action-btn edit-btn" onclick="editMobilizer(${index})">Edit</button>
-        <button class="action-btn delete-btn" onclick="deleteMobilizer(${index})">Delete</button>
-      </td>
-    `;
-    mobilizerBody.appendChild(row);
-  });
-}
+let editfieldmobiliser=document.getElementById('editfieldmobiliser');
+editfieldmobiliser.addEventListener('click', function() {
+    // Redirect to the edit students page
+    window.location.href = 'admin_editstudents.html';
+});
 
-function editMobilizer(index) {
-  const mobilizer = mobilizers[index];
-  document.getElementById("mobilizerName").value = mobilizer.name;
-  document.getElementById("mobilizerRegion").value = mobilizer.region;
-  document.getElementById("mobilizerPhone").value = mobilizer.phone;
-  document.getElementById("mobilizerEmail").value = mobilizer.email;
-  editingMobilizerIndex = index;
-  document.getElementById("mobilizerFormTitle").innerText = "Edit Field Mobilizer";
-}
-
-function deleteMobilizer(index) {
-  if (confirm("Are you sure you want to delete this field mobilizer?")) {
-    mobilizers.splice(index, 1);
-    renderMobilizerList();
-  }
-}
-
-function clearMobilizerForm() {
-  document.getElementById("mobilizerName").value = "";
-  document.getElementById("mobilizerRegion").value = "";
-  document.getElementById("mobilizerPhone").value = "";
-  document.getElementById("mobilizerEmail").value = "";
-}
-
-document.getElementById("searchMobilizer").addEventListener("input", function () {
-  const query = this.value.toLowerCase();
-  const mobilizerBody = document.getElementById("mobilizerBody");
-  mobilizerBody.innerHTML = "";
-
-  mobilizers
-    .filter(
-      (mobilizer) =>
-        mobilizer.name.toLowerCase().includes(query) ||
-        mobilizer.region.toLowerCase().includes(query)
-    )
-    .forEach((mobilizer, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${mobilizer.name}</td>
-        <td>${mobilizer.region}</td>
-        <td>${mobilizer.phone}</td>
-        <td>${mobilizer.email}</td>
-        <td>
-          <button class="action-btn edit-btn" onclick="editMobilizer(${index})">Edit</button>
-          <button class="action-btn delete-btn" onclick="deleteMobilizer(${index})">Delete</button>
-        </td>
-      `;
-      mobilizerBody.appendChild(row);
-    });
+let requestfieldmobiliser=document.getElementById('requestfieldmobiliser');
+requestfieldmobiliser.addEventListener('click', function() {
+    // Redirect to the view requests page
+    window.location.href = 'admin_viewfieldmobiliserrequest.html';
+   
 });
